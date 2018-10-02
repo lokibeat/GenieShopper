@@ -73,24 +73,30 @@ function runProgram(program) {
     
     for (i=0; i<usage.length; i++) {
         var holder = usage[i]*program.cnpEnergyCharge;
+        console.log("usage: " + usage[i]);
         console.log("Energy Charge: " + holder);
+        console.log("-".repeat(15));
         if (program.isPassThrough) {
             holder += (usage[i]*tduCharges.cnpvc +tduCharges.cnpfc);
         console.log("plus Passthroughs: "+ holder);
+        console.log("-".repeat(15));
         }; 
         if (program.baseCharge){
             holder += program.baseCharge;
             console.log("Plus Base Charge: " + holder)
+            console.log("-".repeat(15));
         };
         if (program.minUsageFee) {
             if (usage[i]<program.minUsageThreshold) {
                 holder += program.minUsageFee;
             console.log("plus minusage fee: " + holder );
+            console.log("-".repeat(15));
             }
         };
         if (program.usesRebates) {
             holder += rebateCalculator(usage[i],program.rebates);
             console.log("plus rebate: " + holder)
+            console.log("-".repeat(15));
         }
         monthlySpend.push(holder);
     }
@@ -100,6 +106,7 @@ function runProgram(program) {
 // }
 
 var totalSum = monthlySpend.reduce(add, 0);
+console.log("-".repeat(25));
 console.log("Program: ", program.provider, " " ,program.name, "-", program.term)
 console.log("Total Usage: ", totalUsage.toFixed(2), " kWh"); 
 console.log("Total Spend: $", totalSum.toFixed(2)); 
@@ -136,15 +143,17 @@ function rebateCalculator(usage, rebate) {
 
             break;
         case "range dependent":
-                console.log("Range Rebate")
-            console.log(rebate);
-            console.log(rebate.rebateData.length)
+            //     console.log("Range Rebate")
+            // console.log(rebate);
             for (j=0; j<rebate.rebateData.length; j++){
                 console.log("amount: " + rebate.rebateData[j].amount,"lower boundary: "+ rebate.rebateData[j].lowerBoundary, "upper boundary: " + rebate.rebateData[j].upperBoundary);
+                if(usage > rebate.rebateData[j].lowerBoundary && usage < rebate.rebateData[j].upperBoundary){
+                    rebateAmount = rebate.rebateData[j].amount*(-1);
+                    break;
+                } else rebateAmount = 0
             }
             // console.log("amount: " + rebate.rebateData[1].amount,"lower boundary: "+ rebate.rebateData[1].boundaries[0], "upper boundary: " + rebate.rebateData[1].boundaries[1]);
-            console.log("usage: " + usage)
-            rebateAmount = 0
+            // console.log("usage: " + usage)
             console.log("rebate amount: " + rebateAmount);
             return rebateAmount
             break;}
