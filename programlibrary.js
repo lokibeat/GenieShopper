@@ -1,5 +1,8 @@
-var usage = [1251.553, 1313.681, 1446.844,1449.297,1993.918,2116.279,2390.659,2357.002,2174.673,1864.513,1434.318,400];
-var disclosurePoints = [500,1000,2000];
+var usage = [400, 900, 1400,1449.297,1993.918,2116.279,2390.659,2357.002,2174.673,1864.513,1434.318,400];
+var usage500 = [500];
+var usage1000 = [1000];
+var usage2000 = [2000];
+
 var tduCharges = {
     cnpfc: 5.47,
     cnpvc: .042536,
@@ -65,6 +68,38 @@ var program4 = {
     minUsageThreshold: 500
 }
 
+var program5 = {
+    provider: "Express Energy",
+    name: "Fast Lane",
+    term: 12,
+    isPassThrough: false,
+    cnpEnergyCharge: 0,
+    usesTiers: true,
+    tiers: {
+        tierData: [
+            {
+                tierType: "rate",
+                lowerBoundary: 1,
+                upperBoundary: 500,
+                rate: .155
+            },
+            {
+                tierType: "fixed amount",
+                lowerBoundary: 500,
+                upperBoundary: 1001,
+                amount: 57
+            },
+            {
+                tierType: "rate",
+                lowerBoundary: 1001,
+                upperBoundary: 10000,
+                rate: .139
+            }
+        ]
+    }
+}
+
+
 
 function runProgram(program) {
     var monthlySpend = [];
@@ -73,30 +108,33 @@ function runProgram(program) {
     
     for (i=0; i<usage.length; i++) {
         var holder = usage[i]*program.cnpEnergyCharge;
-        console.log("usage: " + usage[i]);
-        console.log("Energy Charge: " + holder);
-        console.log("-".repeat(15));
+        // console.log("usage: " + usage[i]);
+        // console.log("Energy Charge: " + holder);
+        // console.log("-".repeat(15));
         if (program.isPassThrough) {
             holder += (usage[i]*tduCharges.cnpvc +tduCharges.cnpfc);
-        console.log("plus Passthroughs: "+ holder);
-        console.log("-".repeat(15));
+        // console.log("plus Passthroughs: "+ holder);
+        // console.log("-".repeat(15));
         }; 
         if (program.baseCharge){
             holder += program.baseCharge;
-            console.log("Plus Base Charge: " + holder)
-            console.log("-".repeat(15));
+            // console.log("Plus Base Charge: " + holder)
+            // console.log("-".repeat(15));
         };
         if (program.minUsageFee) {
             if (usage[i]<program.minUsageThreshold) {
                 holder += program.minUsageFee;
-            console.log("plus minusage fee: " + holder );
-            console.log("-".repeat(15));
+                // console.log("plus minusage fee: " + holder );
+                // console.log("-".repeat(15));
             }
         };
         if (program.usesRebates) {
             holder += rebateCalculator(usage[i],program.rebates);
-            console.log("plus rebate: " + holder)
-            console.log("-".repeat(15));
+            // console.log("plus rebate: " + holder)
+            // console.log("-".repeat(15));
+        }
+        if (program.usesTiers) {
+            holder += tierCalculator(usage[i],program.tiers)
         }
         monthlySpend.push(holder);
     }
@@ -117,6 +155,7 @@ runProgram(program1);
 runProgram(program2);
 runProgram(program3);
 runProgram(program4);
+runProgram(program5);
 
 // helper function to add array values
 function add(a, b) {
@@ -131,14 +170,14 @@ function rebateCalculator(usage, rebate) {
     // console.log(usage, rebate);
     switch (rebate.rebateType){
         case "single":
-            console.log("Single Rebate");
-            console.log("usage:" + usage, "threshold: " + rebate.rebateData.threshold)
+            // console.log("Single Rebate");
+            // console.log("usage:" + usage, "threshold: " + rebate.rebateData.threshold)
              if (usage > rebate.rebateData.threshold){
                  rebateAmount = rebate.rebateData.amount*(-1);
-                 console.log("rebate amount: " + rebateAmount);
+                //  console.log("rebate amount: " + rebateAmount);
                  return rebateAmount
                 } else rebateAmount = 0
-                console.log("rebate amount: " + rebateAmount);
+                // console.log("rebate amount: " + rebateAmount);
                 return rebateAmount
 
             break;
@@ -146,7 +185,7 @@ function rebateCalculator(usage, rebate) {
             //     console.log("Range Rebate")
             // console.log(rebate);
             for (j=0; j<rebate.rebateData.length; j++){
-                console.log("amount: " + rebate.rebateData[j].amount,"lower boundary: "+ rebate.rebateData[j].lowerBoundary, "upper boundary: " + rebate.rebateData[j].upperBoundary);
+                // console.log("amount: " + rebate.rebateData[j].amount,"lower boundary: "+ rebate.rebateData[j].lowerBoundary, "upper boundary: " + rebate.rebateData[j].upperBoundary);
                 if(usage > rebate.rebateData[j].lowerBoundary && usage < rebate.rebateData[j].upperBoundary){
                     rebateAmount = rebate.rebateData[j].amount*(-1);
                     break;
@@ -154,7 +193,31 @@ function rebateCalculator(usage, rebate) {
             }
             // console.log("amount: " + rebate.rebateData[1].amount,"lower boundary: "+ rebate.rebateData[1].boundaries[0], "upper boundary: " + rebate.rebateData[1].boundaries[1]);
             // console.log("usage: " + usage)
-            console.log("rebate amount: " + rebateAmount);
+            // console.log("rebate amount: " + rebateAmount);
             return rebateAmount
             break;}
+    }
+
+    function tierCalculator(usage,tiers) {
+        var tierAmount;
+        for (t=0; t< tiers.tierData.length; t++){
+            // console.log("Calculating Tiers for usage: " + usage);
+            if(usage > tiers.tierData[t].lowerBoundary && usage < tiers.tierData[t].upperBoundary){
+                // console.log(tiers.tierData[t]);
+                switch (tiers.tierData[t].tierType){
+                    case "rate":
+                    // console.log("Rate based tier");
+                    tierAmount = usage * tiers.tierData[t].rate
+                    console.log("rate based tier: $" + tierAmount);
+                    break;
+                    
+                    case "fixed amount":
+                    // console.log("fixed amount tier")
+                    tierAmount = tiers.tierData[t].amount
+                    console.log("fixed amount based tier: $" + tierAmount);
+                    break;
+                }
+            }
+        }
+    return tierAmount;
     }
