@@ -37,7 +37,7 @@ var program3 = {
         rebateType: "single",
         rebateData: {
             amount: 80,
-            threshold: 1000
+            threshold: 999
         }
     }
 }
@@ -101,18 +101,21 @@ var program5 = {
 
 
 
-function runProgram(program) {
+
+
+
+function runProgram(program,usageProfile) {
     var monthlySpend = [];
-    var totalUsage = usage.reduce(add,0)
+    var totalUsage = usageProfile.reduce(add,0)
     
     
-    for (i=0; i<usage.length; i++) {
-        var holder = usage[i]*program.cnpEnergyCharge;
+    for (i=0; i<usageProfile.length; i++) {
+        var holder = usageProfile[i]*program.cnpEnergyCharge;
         // console.log("usage: " + usage[i]);
         // console.log("Energy Charge: " + holder);
         // console.log("-".repeat(15));
         if (program.isPassThrough) {
-            holder += (usage[i]*tduCharges.cnpvc +tduCharges.cnpfc);
+            holder += (usageProfile[i]*tduCharges.cnpvc +tduCharges.cnpfc);
         // console.log("plus Passthroughs: "+ holder);
         // console.log("-".repeat(15));
         }; 
@@ -122,19 +125,19 @@ function runProgram(program) {
             // console.log("-".repeat(15));
         };
         if (program.minUsageFee) {
-            if (usage[i]<program.minUsageThreshold) {
+            if (usageProfile[i]<program.minUsageThreshold) {
                 holder += program.minUsageFee;
                 // console.log("plus minusage fee: " + holder );
                 // console.log("-".repeat(15));
             }
         };
         if (program.usesRebates) {
-            holder += rebateCalculator(usage[i],program.rebates);
+            holder += rebateCalculator(usageProfile[i],program.rebates);
             // console.log("plus rebate: " + holder)
             // console.log("-".repeat(15));
         }
         if (program.usesTiers) {
-            holder += tierCalculator(usage[i],program.tiers)
+            holder += tierCalculator(usageProfile[i],program.tiers)
         }
         monthlySpend.push(holder);
     }
@@ -151,11 +154,11 @@ console.log("Total Spend: $", totalSum.toFixed(2));
 console.log("Avg Cost per kWh: ", ((totalSum/totalUsage)*100).toFixed(3), "c per kWh")
 console.log("-".repeat(25));
 }
-runProgram(program1);
-runProgram(program2);
-runProgram(program3);
-runProgram(program4);
-runProgram(program5);
+runProgram(program1,usage2000);
+runProgram(program2,usage2000);
+runProgram(program3,usage2000);
+runProgram(program4,usage2000);
+runProgram(program5,usage2000);
 
 // helper function to add array values
 function add(a, b) {
