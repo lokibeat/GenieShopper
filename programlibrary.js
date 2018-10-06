@@ -63,7 +63,8 @@ function runProgram(program,usageProfile) {
 // }
 // console.log(monthlySpend);
 var totalSum = monthlySpend.reduce(add, 0);
-objectifyResults(totalSum.toFixed(2),((totalSum/totalUsage)*100).toFixed(3),monthlySpend);
+totalSum = parseFloat(totalSum.toFixed(2));
+objectifyResults(program, totalSum,((totalSum/totalUsage)*100).toFixed(3),monthlySpend);
 resultsArray.push(results);
 // console.log("-".repeat(25));
 // console.log("Program: ", program.provider, " " ,program.name, "-", program.term)
@@ -140,8 +141,10 @@ function tierCalculator(usage,tiers) {
 return tierAmount;
 };
 
-function objectifyResults (totalSpend, perKWhMetric,monthlySpend){
+function objectifyResults (program, totalSpend, perKWhMetric,monthlySpend){
     results = {
+        provider: program.provider,
+        name: program.name,
         totalSpend,
         perKWhMetric,
         monthlySpend
