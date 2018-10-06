@@ -4,6 +4,7 @@ var totalUsage = usage.reduce(add,0)
 var usage500 = [500];
 var usage1000 = [1000];
 var usage2000 = [2000];
+var resultsArray = [];
 
 var tduCharges = {
     cnpfc: 5.47,
@@ -60,15 +61,18 @@ function runProgram(program,usageProfile) {
 //     console.log("Month: ", i+1 ,"Spend: $", monthlySpend[i].toFixed(2));
 //     console.log("-".repeat(25));
 // }
-console.log(monthlySpend);
+// console.log(monthlySpend);
 var totalSum = monthlySpend.reduce(add, 0);
-console.log("-".repeat(25));
-console.log("Program: ", program.provider, " " ,program.name, "-", program.term)
-console.log("Total Usage: ", totalUsage.toFixed(2), " kWh"); 
-console.log("Total Spend: $", totalSum.toFixed(2)); 
-console.log("Avg Cost per kWh: ", ((totalSum/totalUsage)*100).toFixed(3), "c per kWh")
-console.log("-".repeat(25));
+objectifyResults(totalSum.toFixed(2),((totalSum/totalUsage)*100).toFixed(3),monthlySpend);
+resultsArray.push(results);
+// console.log("-".repeat(25));
+// console.log("Program: ", program.provider, " " ,program.name, "-", program.term)
+// console.log("Total Usage: ", totalUsage.toFixed(2), " kWh"); 
+// console.log("Total Spend: $", totalSum.toFixed(2)); 
+// console.log("Avg Cost per kWh: ", ((totalSum/totalUsage)*100).toFixed(3), "c per kWh")
+// console.log("-".repeat(25));
 }
+console.log(resultsArray)
 
 // helper function to add array values
 function add(a, b) {
@@ -109,29 +113,39 @@ function rebateCalculator(usage, rebate) {
             // console.log("rebate amount: " + rebateAmount);
             return rebateAmount
             break;}
-    }
+};
 
 // Calculate tier based rates
-    function tierCalculator(usage,tiers) {
-        var tierAmount;
-        for (t=0; t< tiers.tierData.length; t++){
-            // console.log("Calculating Tiers for usage: " + usage);
-            if(usage > tiers.tierData[t].lowerBoundary && usage < tiers.tierData[t].upperBoundary){
-                // console.log(tiers.tierData[t]);
-                switch (tiers.tierData[t].tierType){
-                    case "rate":
-                    // console.log("Rate based tier");
-                    tierAmount = usage * tiers.tierData[t].rate
-                    // console.log("rate based tier: $" + tierAmount);
-                    break;
-                    
-                    case "fixed amount":
-                    // console.log("fixed amount tier")
-                    tierAmount = tiers.tierData[t].amount
-                    // console.log("fixed amount based tier: $" + tierAmount);
-                    break;
-                }
+function tierCalculator(usage,tiers) {
+    var tierAmount;
+    for (t=0; t< tiers.tierData.length; t++){
+        // console.log("Calculating Tiers for usage: " + usage);
+        if(usage > tiers.tierData[t].lowerBoundary && usage < tiers.tierData[t].upperBoundary){
+            // console.log(tiers.tierData[t]);
+            switch (tiers.tierData[t].tierType){
+                case "rate":
+                // console.log("Rate based tier");
+                tierAmount = usage * tiers.tierData[t].rate
+                // console.log("rate based tier: $" + tierAmount);
+                break;
+                
+                case "fixed amount":
+                // console.log("fixed amount tier")
+                tierAmount = tiers.tierData[t].amount
+                // console.log("fixed amount based tier: $" + tierAmount);
+                break;
             }
         }
-    return tierAmount;
     }
+return tierAmount;
+};
+
+function objectifyResults (totalSpend, perKWhMetric,monthlySpend){
+    results = {
+        totalSpend,
+        perKWhMetric,
+        monthlySpend
+
+    };
+    return results;
+}
