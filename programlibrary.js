@@ -102,7 +102,7 @@ var program5 = {
 
 
 
-
+// Main Function to calculate and aggregate monthly spend
 
 function runProgram(program,usageProfile) {
     var monthlySpend = [];
@@ -139,13 +139,13 @@ function runProgram(program,usageProfile) {
         if (program.usesTiers) {
             holder += tierCalculator(usageProfile[i],program.tiers)
         }
-        monthlySpend.push(holder);
+        monthlySpend.push(parseFloat(holder.toFixed(2)));
     }
 // for (i=0;i<monthlySpend.length;i++) {
 //     console.log("Month: ", i+1 ,"Spend: $", monthlySpend[i].toFixed(2));
 //     console.log("-".repeat(25));
 // }
-
+console.log(monthlySpend);
 var totalSum = monthlySpend.reduce(add, 0);
 console.log("-".repeat(25));
 console.log("Program: ", program.provider, " " ,program.name, "-", program.term)
@@ -154,11 +154,11 @@ console.log("Total Spend: $", totalSum.toFixed(2));
 console.log("Avg Cost per kWh: ", ((totalSum/totalUsage)*100).toFixed(3), "c per kWh")
 console.log("-".repeat(25));
 }
-runProgram(program1,usage2000);
-runProgram(program2,usage2000);
-runProgram(program3,usage2000);
-runProgram(program4,usage2000);
-runProgram(program5,usage2000);
+runProgram(program1,usage);
+runProgram(program2,usage);
+runProgram(program3,usage);
+runProgram(program4,usage);
+runProgram(program5,usage);
 
 // helper function to add array values
 function add(a, b) {
@@ -201,6 +201,7 @@ function rebateCalculator(usage, rebate) {
             break;}
     }
 
+// Calculate tier based rates
     function tierCalculator(usage,tiers) {
         var tierAmount;
         for (t=0; t< tiers.tierData.length; t++){
