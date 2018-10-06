@@ -1,5 +1,5 @@
 const programs = require("./programs.js")
-var usage = [400, 900, 1400,1449.297,1993.918,2116.279,2390.659,2357.002,2174.673,1864.513,1434.318,400];
+var usage = [2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000];
 var totalUsage = usage.reduce(add,0)
 var usage500 = [500];
 var usage1000 = [1000];
@@ -64,8 +64,13 @@ function runProgram(program,usageProfile) {
 // console.log(monthlySpend);
 var totalSum = monthlySpend.reduce(add, 0);
 totalSum = parseFloat(totalSum.toFixed(2));
+// put results in an array of objects
 objectifyResults(program, totalSum,((totalSum/totalUsage)*100).toFixed(3),monthlySpend);
 resultsArray.push(results);
+// sort results array by per kWh rate
+resultsArray.sort(function(a,b){
+    return parseFloat(a.perKWhMetric) - parseFloat(b.perKWhMetric)
+});
 // console.log("-".repeat(25));
 // console.log("Program: ", program.provider, " " ,program.name, "-", program.term)
 // console.log("Total Usage: ", totalUsage.toFixed(2), " kWh"); 
@@ -73,8 +78,10 @@ resultsArray.push(results);
 // console.log("Avg Cost per kWh: ", ((totalSum/totalUsage)*100).toFixed(3), "c per kWh")
 // console.log("-".repeat(25));
 }
-console.log(resultsArray)
-
+for (r=0; r<resultsArray.length; r++) {
+console.log("Record: ", r+1, resultsArray[r])
+console.log("-".repeat(25));
+}
 // helper function to add array values
 function add(a, b) {
     return a + b;
@@ -121,7 +128,7 @@ function tierCalculator(usage,tiers) {
     var tierAmount;
     for (t=0; t< tiers.tierData.length; t++){
         // console.log("Calculating Tiers for usage: " + usage);
-        if(usage > tiers.tierData[t].lowerBoundary && usage < tiers.tierData[t].upperBoundary){
+        if(usage > tiers.tierData[t].lowerBoundary && usage <= tiers.tierData[t].upperBoundary){
             // console.log(tiers.tierData[t]);
             switch (tiers.tierData[t].tierType){
                 case "rate":
@@ -145,6 +152,7 @@ function objectifyResults (program, totalSpend, perKWhMetric,monthlySpend){
     results = {
         provider: program.provider,
         name: program.name,
+        term: program.term,
         totalSpend,
         perKWhMetric,
         monthlySpend

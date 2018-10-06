@@ -82,7 +82,81 @@ var programs = [
             }
         ]
     }
-    }
+    },
+    {   
+    provider: "V247",
+    name: "Autumn Breeze",
+    term: 12,
+    isPassThrough: true,
+    cnpEnergyCharge: .049
+    },
+    {   
+    provider: "Power Express",
+    name: "Turbo ",
+    term: 12,
+    isPassThrough: true,
+    cnpEnergyCharge: .0491
+    },
+    {   
+    provider: "Southwest Power & Light",
+    name: "Spirit of Texas Fixed Rate AutoPay E-Plan",
+    term: 12,
+    isPassThrough: true,
+    cnpEnergyCharge: .05,
+    minUsageFee: 9.95,
+    minUsageThreshold: 1000 
+    },
+    {   
+    provider: "YEP",
+    name: "YEP's Fixed Rate AutoPay E-Plan",
+    term: 12,
+    isPassThrough: true,
+    cnpEnergyCharge: .051,
+    minUsageFee: 9.95,
+    minUsageThreshold: 1000 
+    },
+    {
+    provider: "Frontier Utilities",
+    name: "Straight Power",
+    term: 12,
+    isPassThrough: false,
+    cnpEnergyCharge: 0,
+    baseCharge: 155,
+    usesTiers: true,
+    tiers: {
+        tierData: [
+            {
+                tierType: "rate",
+                lowerBoundary: 1,
+                upperBoundary: 2000,
+                rate: 0
+            },
+            {
+                tierType: "rate",
+                lowerBoundary: 2000,
+                upperBoundary: 10000,
+                rate: .155
+            }],
+        }
+    },
+    {
+    provider: "Frontier Utilities",
+    name: "Beat the Heat",
+    term: 12,
+    isPassThrough: true,
+    cnpEnergyCharge: 0.065,
+    baseCharge: 7.95,
+    usesRebates: true,
+    rebates: {
+        rebateType: "range dependent",
+        rebateData: [
+            {
+                amount: 40,
+                lowerBoundary: 1900,
+                upperBoundary: 2400
+            }
+        ]},
+    }  
 ];
 
 module.exports = programs;
