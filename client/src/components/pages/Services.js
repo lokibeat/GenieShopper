@@ -2,6 +2,7 @@ import React from "react";
 import "./Services.css";
 import { Layout } from "../Layout";
 import ButtonBases from "./ButtonBases.js";
+import withStyles from "./SubmitButton.js";
 
 const Services = () => (
   <Layout>

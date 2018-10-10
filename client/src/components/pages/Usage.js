@@ -2,6 +2,7 @@ import React from "react";
 import "./Usage.css";
 import { Layout } from "../Layout";
 import OutlinedTextFields from "./NumberButton";
+import ButtonSizes from "./SubmitButton.js";
 
 const Usage = props => (
   <Layout>
@@ -46,6 +47,8 @@ const Usage = props => (
               <OutlinedTextFields />
             </span>
           </li>
+        </div>
+        <div className="container">
           <li>
             <span>Month 7</span>
             <span className="number">
@@ -83,6 +86,14 @@ const Usage = props => (
             </span>
           </li>
         </div>
+        <div className="total" />
+        <li>
+          <span>Total </span>
+          <span className="number">
+            <OutlinedTextFields />
+            <ButtonSizes />
+          </span>
+        </li>
       </ul>
     </div>
   </Layout>

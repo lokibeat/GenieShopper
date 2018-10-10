@@ -1,6 +1,7 @@
 import React from "react";
 import "./Output.css";
 import { Layout } from "../Layout";
+//import { EnhancedTable } from "../Table.js";
 
 const Output = () => (
   <Layout>
