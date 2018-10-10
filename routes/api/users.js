@@ -18,7 +18,7 @@ const User = require('../../models/User');
 
 router.get('/test', (req, res) =>  res.json({msg: "User Works"}));
 
-// @route   GET api/users/register
+// @route   POST api/users/register
 // @desc    Register user
 // @access  Public
 
