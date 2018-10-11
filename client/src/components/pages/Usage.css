@@ -17,8 +17,9 @@ li {
 .container {
   flex-direction: row;
   display: inline-block;
+  width: 500px;
 }
 
-.number input {
+.number {
   height: unset !important;
 }

@@ -20,9 +20,9 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 import { lighten } from "@material-ui/core/styles/colorManipulator";
 
 let counter = 0;
-function createData(name, calories, fat, carbs, protein) {
+function createData(name, company, unitPrice, totalPrice) {
   counter += 1;
-  return { id: counter, name, calories, fat, carbs, protein };
+  return { id: counter, name, company, unitPrice, totalPrice };
 }
 
 function desc(a, b, orderBy) {
@@ -56,12 +56,20 @@ const rows = [
     id: "name",
     numeric: false,
     disablePadding: true,
-    label: "Dessert (100g serving)"
+    label: "Provider"
   },
-  { id: "calories", numeric: true, disablePadding: false, label: "Calories" },
-  { id: "fat", numeric: true, disablePadding: false, label: "Fat (g)" },
-  { id: "carbs", numeric: true, disablePadding: false, label: "Carbs (g)" },
-  { id: "protein", numeric: true, disablePadding: false, label: "Protein (g)" }
+  {
+    id: "unitPrice",
+    numeric: true,
+    disablePadding: false,
+    label: "Cent per kWH"
+  },
+  {
+    id: "totalPrice",
+    numeric: true,
+    disablePadding: false,
+    label: "Total Price"
+  }
 ];
 
 class EnhancedTableHead extends React.Component {
@@ -201,36 +209,40 @@ EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);
 
 const styles = theme => ({
   root: {
-    width: "100%",
+    width: "60%",
     marginTop: theme.spacing.unit * 3
   },
   table: {
-    minWidth: 1020
+    minWidth: 500
   },
   tableWrapper: {
     overflowX: "auto"
+  },
+  unitPrice: {
+    width: "100px"
+  },
+  totalPrice: {
+    width: "100px"
+  },
+  name: {
+    width: "100px"
+  },
+  isSelected: {
+    width: "100px"
   }
 });
 
 class EnhancedTable extends React.Component {
   state = {
     order: "asc",
-    orderBy: "calories",
+    orderBy: "unitPrice",
     selected: [],
     data: [
-      createData("Cupcake", 305, 3.7, 67, 4.3),
-      createData("Donut", 452, 25.0, 51, 4.9),
-      createData("Eclair", 262, 16.0, 24, 6.0),
-      createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-      createData("Gingerbread", 356, 16.0, 49, 3.9),
-      createData("Honeycomb", 408, 3.2, 87, 6.5),
-      createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-      createData("Jelly Bean", 375, 0.0, 94, 0.0),
-      createData("KitKat", 518, 26.0, 65, 7.0),
-      createData("Lollipop", 392, 0.2, 98, 0.0),
-      createData("Marshmallow", 318, 0, 81, 2.0),
-      createData("Nougat", 360, 19.0, 9, 37.0),
-      createData("Oreo", 437, 18.0, 63, 4.0)
+      createData("Company A", "company", 9.4, 2000),
+      createData("Company B", "company", 9.3, 1900),
+      createData("Company C", "company", 8.9, 1850),
+      createData("Company D", "company", 8.5, 1800),
+      createData("Company E", "company", 8.3, 1750)
     ],
     page: 0,
     rowsPerPage: 5
@@ -310,6 +322,7 @@ class EnhancedTable extends React.Component {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(n => {
                   const isSelected = this.isSelected(n.id);
+                  console.log(n);
                   return (
                     <TableRow
                       hover
@@ -320,16 +333,26 @@ class EnhancedTable extends React.Component {
                       key={n.id}
                       selected={isSelected}
                     >
-                      <TableCell padding="checkbox">
+                      <TableCell
+                        className={classes.isSelected}
+                        padding="checkbox"
+                      >
                         <Checkbox checked={isSelected} />
                       </TableCell>
-                      <TableCell component="th" scope="row" padding="none">
+                      <TableCell
+                        className={classes.name}
+                        component="th"
+                        scope="row"
+                        padding="none"
+                      >
                         {n.name}
                       </TableCell>
-                      <TableCell numeric>{n.calories}</TableCell>
-                      <TableCell numeric>{n.fat}</TableCell>
-                      <TableCell numeric>{n.carbs}</TableCell>
-                      <TableCell numeric>{n.protein}</TableCell>
+                      <TableCell className={classes.unitPrice} numeric>
+                        {n.unitPrice}
+                      </TableCell>
+                      <TableCell className={classes.totalPrice} numeric>
+                        {n.totalPrice}
+                      </TableCell>
                     </TableRow>
                   );
                 })}
