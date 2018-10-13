@@ -1,0 +1,10 @@
+.services {
+  background-image: url("../../assets/images/cable_clouds.jpg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  color: white;
+  text-align: center;
+}

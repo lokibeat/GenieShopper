@@ -20,7 +20,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import './App.css';
 
 // check for token
-if(localStorage.jwtToken) {
+if(localStorage.jwtToken !== "undefined") {
   // set auth token auth
   setAuthToken(localStorage.jwtToken);
   // decode tokena dn get user info and expiration

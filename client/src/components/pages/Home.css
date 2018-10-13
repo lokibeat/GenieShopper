@@ -1,0 +1,10 @@
+.home {
+  background-image: url("../../assets/images/five_bulbs.jpg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  color: aliceblue;
+  text-align: center;
+}

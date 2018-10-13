@@ -1,0 +1,19 @@
+.monthly {
+  background-image: url("../../assets/images/evening.jpg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  color: white;
+  text-align: center;
+}
+
+.ct-chart {
+  stroke: red;
+  stroke-width: 5px;
+}
+
+.chart {
+  margin-top: 150px;
+}
