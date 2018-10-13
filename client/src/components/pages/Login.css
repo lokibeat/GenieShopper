@@ -1,0 +1,17 @@
+.login {
+  background-image: url("../../assets/images/nightly_sky.jpg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  color: white;
+  text-align: left;
+}
+
+.container {
+  width: 320px;
+  padding: 100px;
+  /* border: 5px solid gray; */
+  margin: 5;
+}
