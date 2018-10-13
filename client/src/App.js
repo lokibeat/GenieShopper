@@ -16,6 +16,12 @@ import Landing from './components/layout/Landing';
 import Register  from './components/auth/Register';
 import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
+import Home from "./components/pages/Home";
+import Services from "./components/pages/Services";
+import Usage from "./components/pages/Usage";
+import Output from "./components/pages/Output";
+import Monthly from "./components/pages/Monthly";
+
 
 import './App.css';
 
@@ -52,6 +58,11 @@ class App extends Component {
               <Route exact path="/register" component={ Register }/>
               <Route exact path="/login" component={ Login }/>
               <Route exact path="/dashboard" component={ Dashboard }/>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/services" component={Services} />
+              <Route path="/usage" component={Usage} />
+              <Route path="/output" component={Output} />
+              <Route path="/monthly" component={Monthly} />   
             </div>
             <Footer />
           </div>
