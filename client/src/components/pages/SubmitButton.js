@@ -14,7 +14,12 @@ function ButtonSizes(props) {
   return (
     <div>
       <div>
-        <Button size="large" className={classes.button}>
+        <Button
+          variant="contained"
+          size="large"
+          color="secondary"
+          className={classes.button}
+        >
           Submit
         </Button>
       </div>

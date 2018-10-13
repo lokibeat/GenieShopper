@@ -25,7 +25,7 @@ class Chart extends React.Component {
       ]
     };
     var options = {
-      high: 50,
+      high: 40,
       low: 0
     };
 

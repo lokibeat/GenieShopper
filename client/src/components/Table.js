@@ -20,9 +20,9 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 import { lighten } from "@material-ui/core/styles/colorManipulator";
 
 let counter = 0;
-function createData(name, company, unitPrice, totalPrice) {
+function createData(name, unitPrice, totalPrice) {
   counter += 1;
-  return { id: counter, name, company, unitPrice, totalPrice };
+  return { id: counter, name, unitPrice, totalPrice };
 }
 
 function desc(a, b, orderBy) {
@@ -213,22 +213,22 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 3
   },
   table: {
-    minWidth: 500
+    minWidth: 400
   },
   tableWrapper: {
     overflowX: "auto"
   },
   unitPrice: {
-    width: "100px"
+    width: "80px"
   },
   totalPrice: {
-    width: "100px"
+    width: "80px"
   },
   name: {
-    width: "100px"
+    width: "80px"
   },
   isSelected: {
-    width: "100px"
+    width: "80px"
   }
 });
 
@@ -238,11 +238,11 @@ class EnhancedTable extends React.Component {
     orderBy: "unitPrice",
     selected: [],
     data: [
-      createData("Company A", "company", 9.4, 2000),
-      createData("Company B", "company", 9.3, 1900),
-      createData("Company C", "company", 8.9, 1850),
-      createData("Company D", "company", 8.5, 1800),
-      createData("Company E", "company", 8.3, 1750)
+      createData("Company A", 9.4, 2000),
+      createData("Company B", 9.3, 1900),
+      createData("Company C", 8.9, 1850),
+      createData("Company D", 8.5, 1800),
+      createData("Company E", 8.3, 1750)
     ],
     page: 0,
     rowsPerPage: 5

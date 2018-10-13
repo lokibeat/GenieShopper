@@ -18,6 +18,12 @@ li {
   flex-direction: row;
   display: inline-block;
   width: 500px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+.total {
+  padding-top: ;
 }
 
 .number {
