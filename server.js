@@ -34,7 +34,7 @@ require('./config/passport')(passport);
 //Use Routes
 // app.use('/api/users', users);
 // app.use('/api/profile', profile);
-app.use('*',(req,res)=> {res.sendFile(path.join(__dirname, "../client/build/index.html"))});
+app.use('*',(req,res)=> {res.sendFile(path.join(__dirname, "./client/build/index.html"))});
 
 
 const port = process.env.PORT || 5000 ;
