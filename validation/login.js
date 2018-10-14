@@ -12,7 +12,7 @@ module.exports = function validateLoginInfo(data) {
     }
     
     if(!Validator.isEmail(data.email)){
-        errors.name = "Email is invalid"
+        errors.email = "Email is invalid"
     }
 
     

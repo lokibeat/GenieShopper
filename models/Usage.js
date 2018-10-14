@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 //Create Schema 
-const UsageRequestSchema = new Schema({
+const UsageSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
         ref: 'users'
@@ -21,4 +21,4 @@ const UsageRequestSchema = new Schema({
 function arrayLimit(val) {
     return val.length === 12;
   }
-module.exports = UsageRequest = mongoose.model('usagerequests',UsageRequestSchema);
+module.exports = Usage = mongoose.model('usagerequests',UsageSchema);
