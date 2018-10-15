@@ -26,25 +26,25 @@ import Monthly from "./components/pages/Monthly";
 import './App.css';
 
 // check for token
-if(localStorage.jwtToken !== "undefined") {
-  // set auth token auth
-  setAuthToken(localStorage.jwtToken);
-  // decode tokena dn get user info and expiration
-  const decoded = jwt_decode(localStorage.jwtToken);
-  // set user and isAuthenticated
-  store.dispatch(setCurrentUser(decoded));
+// if(localStorage.jwtToken !== "undefined") {
+//   // set auth token auth
+//   setAuthToken(localStorage.jwtToken);
+//   // decode tokena dn get user info and expiration
+//   const decoded = jwt_decode(localStorage.jwtToken);
+//   // set user and isAuthenticated
+//   store.dispatch(setCurrentUser(decoded));
 
-  // check for expired token
-  const currentTime = Date.now() /1000;
-  if(decoded.exp < currentTime) {
-    // logout user
-    store.dispatch(logoutUser());
-    // clear current profile
-    store.dispatch(clearCurrentProfile());
-    // redirect to login
-    window.location.hreg = '/login';
-  }
-}
+//   // check for expired token
+//   const currentTime = Date.now() /1000;
+//   if(decoded.exp < currentTime) {
+//     // logout user
+//     store.dispatch(logoutUser());
+//     // clear current profile
+//     store.dispatch(clearCurrentProfile());
+//     // redirect to login
+//     window.location.hreg = '/login';
+//   }
+// }
 
 class App extends Component {
   render() {
