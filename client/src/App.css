@@ -13,7 +13,7 @@ img {
 }
 
 .landing-inner {
-  padding-top: 80px;
+  padding-top: 100px;
 }
 
 .dark-overlay {
@@ -37,3 +37,4 @@ img {
 .form-control::placeholder {
   color: #bbb !important;
 }
+

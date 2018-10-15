@@ -1,4 +1,5 @@
 .output {
+  position: relative;
   background-image: url("../../assets/images/blur-bright-bulb-813332.jpg");
   height: 100%;
   background-position: center;

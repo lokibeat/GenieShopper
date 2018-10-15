@@ -5,18 +5,18 @@ class Chart extends React.Component {
   render() {
     var data = {
       labels: [
-        "M1",
-        "M2",
-        "M3",
-        "M4",
-        "M5",
-        "M6",
-        "M7",
-        "M8",
-        "M9",
-        "M10",
-        "M11",
-        "M12"
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12"
       ],
       series: [
         [12, 17, 7, 17, 23, 18, 38, 12, 17, 7, 17, 23],
@@ -25,8 +25,9 @@ class Chart extends React.Component {
       ]
     };
     var options = {
-      high: 40,
-      low: 0
+      // high: 100,
+      low: 0,
+      showArea: true
     };
 
     var type = "Line";

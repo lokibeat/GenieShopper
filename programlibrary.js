@@ -1,4 +1,5 @@
-const programs = require("./programs.js")
+const programs = require("./programs.js");
+const usageProfile = require("./usageProfiles.js");
 var usage = [2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000];
 var totalUsage = usage.reduce(add,0)
 var usage500 = [500];
@@ -12,6 +13,8 @@ var tduCharges = {
     oncfv: 3.49,
     oncvc:.038271
 };
+
+
 
 
 // Run analysis

@@ -5,7 +5,7 @@ import Chart from "../Chart/chart";
 
 const Monthly = () => (
   <Layout>
-    <div class="monthly">
+    <div className="monthly">
       <h1>Monthly</h1>
       <div className="chart">
         <Chart />
