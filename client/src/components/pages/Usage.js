@@ -4,6 +4,7 @@ import { Layout } from "../Layout";
 import OutlinedTextFields from "./NumberButton";
 import ButtonSizes from "./SubmitButton.js";
 
+
 const Usage = props => (
   <Layout>
     <div class="usage">

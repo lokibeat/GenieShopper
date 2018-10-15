@@ -51,10 +51,22 @@ class Navbar extends Component {
       <div className="collapse navbar-collapse" id="mobile-nav">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
-            <a className="nav-link" href="profiles.html"> Get Started
-            </a>
+          <Link className="navbar-brand" to="/services">Get Started</Link>
           </li>
         </ul>
+        <Link className="navbar-brand" to="/usage">Enter Usage</Link>
+      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <Link className="navbar-brand" to="/output">Show Output</Link>
+      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <Link className="navbar-brand" to="/monthly">Show Chart</Link>
+      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
+        <span className="navbar-toggler-icon"></span>
+      </button>
+
         {isAuthenticated ? authLinks : guestLinks}
         
       </div>

@@ -6,6 +6,8 @@ import Typography from "@material-ui/core/Typography";
 import appartmentimg from "../../assets/images/appartment.jpeg";
 import houseimg from "../../assets/images/house.jpeg";
 import mixedimg from "../../assets/images/mixed.jpeg";
+import { Link } from 'react-router-dom';
+
 
 const styles = theme => ({
   root: {
