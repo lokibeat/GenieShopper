@@ -9,10 +9,12 @@ const profile = require('./routes/api/profile');
 
 const app = express();
 
+
 //Body Parser middleware
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, "/client/build")));
 
 //DB Config
 const db = require('./config/keys').mongoURI;
@@ -34,7 +36,7 @@ require('./config/passport')(passport);
 //Use Routes
 app.use('/api/users', users);
 app.use('/api/profile', profile);
-app.use('*',(req,res)=> {res.sendFile(path.join(__dirname, "./client/build/index.html"))});
+app.use('*',(req,res)=> {res.sendFile(path.join(__dirname, "/client/build/index.html"))});
 
 
 const port = process.env.PORT || 5000 ;

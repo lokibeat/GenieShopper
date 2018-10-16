@@ -17,7 +17,7 @@ li {
 .container {
   flex-direction: row;
   display: inline-block;
-  width: 500px;
+  width: 200%;
   padding-top: 20px;
   padding-bottom: 10px;
 }
