@@ -7,11 +7,12 @@ import Services from "./components/pages/Services";
 import Usage from "./components/pages/Usage";
 import Output from "./components/pages/Output";
 import Monthly from "./components/pages/Monthly";
+import Navbar from "./components/Navbar/Navbar";
 
 const App = () => (
   <Router>
     <div>
-      <NavTabs />
+      <Navbar />
       <Route exact path="/" component={Home} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/services" component={Services} />

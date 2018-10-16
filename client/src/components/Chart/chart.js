@@ -26,7 +26,10 @@ class Chart extends React.Component {
     };
     var options = {
       high: 40,
-      low: 0
+      low: 0,
+      scaleMinSpace: 5,
+      width: "1200px",
+      height: "400px"
     };
 
     var type = "Line";
