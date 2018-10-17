@@ -9,7 +9,7 @@
     "client-install": "npm install --prefix client",
     "start": "node server.js",
     "server": "nodemon server.js",
-    "install": "cd client && yarn install",
+    "install": "cd client && npm install",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
