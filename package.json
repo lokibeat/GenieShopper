@@ -1,6 +1,8 @@
 {
   "name": "genieshopper",
   "version": "1.0.0",
+  "engines": {
+    "node": "8.11.1"},
   "description": "Electricity Program Shopping Assistant",
   "main": "server.js",
   "scripts": {
