@@ -108,6 +108,7 @@ function ButtonBases(props) {
     <div className={classes.root}>
       {images.map(image => (
         <ButtonBase
+          component={ Link } to='/usage'
           focusRipple
           key={image.title}
           className={classes.image}

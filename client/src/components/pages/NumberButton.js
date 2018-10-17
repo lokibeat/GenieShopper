@@ -22,7 +22,7 @@ const styles = theme => ({
 
 class OutlinedTextFields extends React.Component {
   state = {
-    age: ""
+    value: ""
   };
 
   handleChange = name => event => {
@@ -39,8 +39,8 @@ class OutlinedTextFields extends React.Component {
         <TextField
           id="outlined-number"
           label=""
-          value={this.state.age}
-          onChange={this.handleChange("age")}
+          value={this.state.value}
+          onChange={this.handleChange("value")}
           type="number"
           className={classes.textField}
           InputLabelProps={{

@@ -19,6 +19,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import Home from "./components/pages/Home";
 import Services from "./components/pages/Services";
 import Usage from "./components/pages/Usage";
+import UsageInput from "./components/pages/UsageInput";
 import Output from "./components/pages/Output";
 import Monthly from "./components/pages/Monthly";
 
@@ -53,14 +54,14 @@ class App extends Component {
           <Router>
           <div className="App">
             <Navbar />
-            <Route exact path='/' component={Landing} />
+            {/* <Route exact path='/' component={Landing} /> */}
             <div className="container">
               <Route exact path="/register" component={ Register }/>
               <Route exact path="/login" component={ Login }/>
               <Route exact path="/dashboard" component={ Dashboard }/>
               <Route exact path="/" component={Home} />
               <Route exact path="/services" component={Services} />
-              <Route path="/usage" component={Usage} />
+              <Route path="/usage" component={UsageInput} />
               <Route path="/output" component={Output} />
               <Route path="/monthly" component={Monthly} />   
             </div>
