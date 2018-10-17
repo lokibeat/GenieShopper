@@ -61,7 +61,7 @@ class App extends Component {
               <Route exact path="/dashboard" component={ Dashboard }/>
               <Route exact path="/" component={Home} />
               <Route exact path="/services" component={Services} />
-              <Route path="/usage" component={UsageInput} />
+              <Route path="/usage" component={Usage} />
               <Route path="/output" component={Output} />
               <Route path="/monthly" component={Monthly} />   
             </div>
